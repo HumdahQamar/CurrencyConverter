@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux'
-import { ratesReducer } from './exchangeRates'
+import { combineReducers } from 'redux';
+import { ratesReducer } from './exchangeRates';
 
 export default combineReducers({
-  ratesReducer
-})
-export const rootReducer = (state = {}, action) => {
-  return state
-}
+  ratesReducer,
+});
+// eslint-disable-next-line no-unused-vars
+export const rootReducer = (state = {}, action) => state;

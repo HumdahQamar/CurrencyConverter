@@ -3,31 +3,31 @@ import {FETCH_RATES_PENDING, FETCH_RATES_SUCCESS, FETCH_RATES_ERROR} from '../ac
 const initialState = {
   pending: false,
   rates: {},
-  base: "",
-  symbol: "",
-  error: null
-}
+  base: '',
+  symbol: '',
+  error: null,
+};
 
 export function ratesReducer(state = initialState, action) {
   switch(action.type) {
-    case FETCH_RATES_PENDING: 
+    case FETCH_RATES_PENDING:
       return {
         ...state,
-        pending: true
-      }
+        pending: true,
+      };
     case FETCH_RATES_SUCCESS:
       return {
         ...state,
         pending: false,
-        rates: action.payload
-      }
+        rates: action.payload,
+      };
     case FETCH_RATES_ERROR:
       return {
         ...state,
         pending: false,
-        error: action.error
-      }
-    default: 
+        error: action.error,
+      };
+    default:
       return state;
   }
 }
