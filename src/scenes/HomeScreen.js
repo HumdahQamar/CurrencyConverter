@@ -2,8 +2,11 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { bindActionCreators } from 'redux';
+import { Icon } from 'react-native-elements';
 
 import fetchRatesAction from '../actions/fetchRates';
+import setBaseAction from '../actions/setBase';
+import setSymbolAction from '../actions/setSymbol';
 import {getRatesError, getRates, getRatesPending, getBase, getSymbol} from '../reducers/exchangeRates';
 import CurrencyField from '../components/CurrencyField';
 
@@ -13,16 +16,14 @@ class HomeScreen extends Component {
     symbol: '',
   }
   componentWillMount() {
-    // eslint-disable-next-line react/prop-types
     const {fetchRates} = this.props;
     fetchRates();
   }
-  fetchConversion = () => {
-    const {fetchRates} = this.props;
-    fetchRates(this.props.base.currency, this.props.symbol.currency);
-  }
-  setBase = base => {
-    this.setState({ base: base });
+  reverseCurrencies = () => {
+    const {setBase, setSymbol, fetchRates} = this.props;
+    const tempBase = Object.assign({}, this.props.base);
+    setBase({currency: this.props.symbol.currency, value: 0});
+    setSymbol({currency: tempBase.currency, value: 0});
   }
   render() {
     return (
@@ -31,16 +32,25 @@ class HomeScreen extends Component {
           buttonText='USD'
           placeholder='Base Currency'
           editable
+          navigation={ this.props.navigation }
+          name='base'
         />
         <CurrencyField
           buttonText='EUR'
           editable={ false }
           value={ this.props.symbol.value }
+          navigation={ this.props.navigation }
+          name='symbol'
         />
-        <Button
-          title='Convert'
-          onPress={ this.fetchConversion }
-        />
+        <View style={{
+          flexDirection: 'row'
+        }}>
+          <Icon name='sync' />
+          <Button
+            title='Reverse Currencies'
+            onPress={ this.reverseCurrencies }
+          />
+        </View>
       </View>
     );
   }
@@ -55,6 +65,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchRates: fetchRatesAction,
+  setBase: setBaseAction,
+  setSymbol: setSymbolAction,
 }, dispatch);
 
 export default connect(
@@ -67,7 +79,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: 'white',
-    flex: 1,
+    // flex: 2,
     justifyContent: 'center',
+    paddingTop: '200px',
+    paddingBottom: '250px',
+    height: '100%'
   },
 });

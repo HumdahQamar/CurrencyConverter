@@ -1,11 +1,11 @@
 // eslint-disable-next-line max-len
-import {FETCH_RATES_PENDING, FETCH_RATES_SUCCESS, FETCH_RATES_ERROR, SET_SYMBOL, SET_BASE, FETCH_CONVERSION_SUCCESS} from '../actions';
+import {FETCH_RATES_PENDING, FETCH_RATES_SUCCESS, FETCH_RATES_ERROR, SET_SYMBOL, SET_SYMBOL_CURRENCY, SET_BASE, FETCH_CONVERSION_SUCCESS} from '../actions';
 
 const initialState = {
   pending: false,
   rates: {},
   base: {currency: 'USD', value: 1},
-  symbol: {currency: 'EUR', value: 0},
+  symbol: {currency: 'GBP', value: 0},
   factor: 0,
   error: null,
 };

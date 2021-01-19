@@ -7,6 +7,9 @@ import fetchRatesAction from '../actions/fetchRates';
 import {getRatesError, getRatesPending} from '../reducers/exchangeRates';
 
 class IntroScreen extends Component {
+  componentWillMount() {
+    console.log(this.props);
+  }
   render() {
     return (
       <Button

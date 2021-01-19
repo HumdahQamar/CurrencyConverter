@@ -1,9 +1,9 @@
 import {setBase} from './index';
 
-function setConversionSymbol(base = 'USD') {
+function setConversionBase(base = {currency: 'USD', value: 1}) {
   return dispatch => {
     dispatch(setBase(base));
   };
 }
 
-export default setConversionSymbol;
+export default setConversionBase;

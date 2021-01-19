@@ -4,8 +4,9 @@ export const FETCH_RATES_ERROR = 'FETCH_RATES_ERROR';
 
 export const SET_BASE = 'SET_BASE';
 export const SET_SYMBOL = 'SET_SYMBOL';
+export const SET_SYMBOL_CURRENCY = 'SET_SYMBOL_CURRENCY';
 export const SET_FACTOR = 'SET_FACTOR';
-export const FETCH_CONVERSION_SUCCESS = 'FETCH_CONVERSION_SUCCESS'
+export const FETCH_CONVERSION_SUCCESS = 'FETCH_CONVERSION_SUCCESS';
 
 export function fetchRatesPending() {
   return {

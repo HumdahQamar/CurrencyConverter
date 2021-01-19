@@ -11,7 +11,11 @@ function fetchRates(base = '', symbol = '') {
         } else if (Object.keys(res.rates).length === 1) {
           dispatch(fetchConversionSuccess(res.rates));
         } else {
-          dispatch(fetchRatesSuccess(res.rates));
+          const rates = [];
+          Object.keys(res.rates).forEach(element => {
+            rates.push({currency: element, factor: res.rates[element]});
+          });
+          dispatch(fetchRatesSuccess(rates));
         }
         return res.rates;
       })

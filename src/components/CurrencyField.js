@@ -4,7 +4,8 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getRates, getBase } from '../reducers/exchangeRates';
+import { getRates, getBase, getSymbol } from '../reducers/exchangeRates';
+import fetchRatesAction from '../actions/fetchRates';
 import setBaseAction from '../actions/setBase';
 
 class CurrencyField extends Component {
@@ -14,6 +15,10 @@ class CurrencyField extends Component {
       editable: PropTypes.bool,
       placeholder: PropTypes.string,
       value: PropTypes.number,
+      navigation: PropTypes.object,
+      name: PropTypes.string,
+      setBase: PropTypes.func,
+      base: PropTypes.object,
     };
   }
   state = {
@@ -28,26 +33,36 @@ class CurrencyField extends Component {
     }
   }
   setValue = value => {
-    const {setBase} = this.props;
+    const {setBase, fetchRates} = this.props;
     this.setState({ value: value });
-    if (this.props.placeholder.toLowerCase().includes('base')) {
-      setBase({currency: this.props.buttonText, value: value});
+    if (this.props.name === 'base') {
+      setBase({currency: this.props.base.currency, value: value});
+      fetchRates(this.props.base.currency, this.props.symbol.currency);
     }
   }
   render() {
     return (
       <View style={ styles.container }>
-        <Button
-          title={ this.props.buttonText }
-          onPress={ () =>
-            this.props.navigation.navigate('Home', { name: 'Jane' })
-          }
-        />
+        <View style={{ width: '50px' }}>
+          <Button
+            title={ this.props.name === 'base' ? this.props.base.currency : this.props.symbol.currency }
+            onPress={ () =>
+              this.props.navigation.navigate('CurrencyList', { selectedValue: this.props.name })
+            }
+            color='grey'
+          />
+        </View>
         <TextInput
-          style={{ height: 33, borderColor: 'gray', borderWidth: 1 }}
+          style={{
+            height: 33,
+            borderColor: 'gray',
+            borderWidth: 1,
+            borderRadius: '4px',
+            paddingStart: '5px',
+          }}
           underlineColorAndroid = 'transparent'
           placeholder = { this.props.placeholder }
-          placeholderTextColor = '#9a73ef'
+          placeholderTextColor = '#808080'
           autoCapitalize = 'none'
           editable = { this.state.editable }
           value={ this.props.value }
@@ -60,10 +75,12 @@ class CurrencyField extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setBase: setBaseAction,
+  fetchRates: fetchRatesAction,
 }, dispatch);
 const mapStateToProps = state => ({
   rates: getRates(state),
   base: getBase(state),
+  symbol: getSymbol(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyField);

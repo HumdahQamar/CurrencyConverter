@@ -8,6 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './src/scenes/HomeScreen';
 import IntroScreen from './src/scenes/IntroScreen';
+import CurrencyField from './src/components/CurrencyField'
+import CurrencySelector from './src/scenes/CurrencySelector';
 import rootReducer from './src/reducers';
 
 const middlewares = [thunk];
@@ -29,6 +31,11 @@ export default function App() {
             name='Home'
             component={ HomeScreen }
             options={{ title: 'Welcome' }}
+          />
+          <Stack.Screen
+            name='CurrencyList'
+            component={ CurrencySelector }
+            options={{ title: 'Choose Currency' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
