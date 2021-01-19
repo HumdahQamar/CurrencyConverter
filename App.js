@@ -12,7 +12,6 @@ import rootReducer from './src/reducers';
 
 const middlewares = [thunk];
 const store = createStore(rootReducer, {}, applyMiddleware(...middlewares));
-// console.log('hi', store.getState())
 const Stack = createStackNavigator();
 
 
@@ -31,7 +30,6 @@ export default function App() {
             component={ HomeScreen }
             options={{ title: 'Welcome' }}
           />
-          { /* <Stack.Screen name="Profile" component={ProfileScreen} /> */ }
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

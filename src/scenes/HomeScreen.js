@@ -1,24 +1,46 @@
 import { connect } from 'react-redux';
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { bindActionCreators } from 'redux';
 
 import fetchRatesAction from '../actions/fetchRates';
-import {getRatesError, getRates, getRatesPending} from '../reducers/exchangeRates';
+import {getRatesError, getRates, getRatesPending, getBase, getSymbol} from '../reducers/exchangeRates';
+import CurrencyField from '../components/CurrencyField';
 
 class HomeScreen extends Component {
+  state = {
+    base: '',
+    symbol: '',
+  }
   componentWillMount() {
     // eslint-disable-next-line react/prop-types
     const {fetchRates} = this.props;
     fetchRates();
   }
+  fetchConversion = () => {
+    const {fetchRates} = this.props;
+    fetchRates(this.props.base.currency, this.props.symbol.currency);
+  }
+  setBase = base => {
+    this.setState({ base: base });
+  }
   render() {
-    console.log('rates', this.props);
     return (
       <View style={ styles.container }>
-        <Text>Guys, this is your HomeScreen</Text>
-        <StatusBar style='auto' />
+        <CurrencyField
+          buttonText='USD'
+          placeholder='Base Currency'
+          editable
+        />
+        <CurrencyField
+          buttonText='EUR'
+          editable={ false }
+          value={ this.props.symbol.value }
+        />
+        <Button
+          title='Convert'
+          onPress={ this.fetchConversion }
+        />
       </View>
     );
   }
@@ -28,6 +50,8 @@ const mapStateToProps = state => ({
   error: getRatesError(state),
   rates: getRates(state),
   pending: getRatesPending(state),
+  base: getBase(state),
+  symbol: getSymbol(state),
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchRates: fetchRatesAction,

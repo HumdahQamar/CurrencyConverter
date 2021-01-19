@@ -1,4 +1,4 @@
-import {fetchRatesPending, fetchRatesSuccess, fetchRatesError} from './index';
+import {fetchRatesPending, fetchRatesSuccess, fetchRatesError, fetchConversionSuccess} from './index';
 
 function fetchRates(base = '', symbol = '') {
   return dispatch => {
@@ -8,8 +8,11 @@ function fetchRates(base = '', symbol = '') {
       .then(res => {
         if(res.error) {
           throw(res.error);
+        } else if (Object.keys(res.rates).length === 1) {
+          dispatch(fetchConversionSuccess(res.rates));
+        } else {
+          dispatch(fetchRatesSuccess(res.rates));
         }
-        dispatch(fetchRatesSuccess(res.rates));
         return res.rates;
       })
       .catch(error => {
