@@ -25,12 +25,12 @@ export default function App() {
           <Stack.Screen
             name='Intro'
             component={ IntroScreen }
-            options={{ title: 'Welcome' }}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name='Home'
             component={ HomeScreen }
-            options={{ title: 'Welcome' }}
+            options={{ title: 'Currency Converter' }}
           />
           <Stack.Screen
             name='CurrencyList'
