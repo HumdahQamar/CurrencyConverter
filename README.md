@@ -6,7 +6,7 @@ An application for easy currency conversion, using latest conversion rates pulle
 ## Getting Started
 
 ### Prerequisites
-All required libraries are listed under ```requirements.txt```
+All required libraries are listed under ```package.json```
 The project ste-up requires ```npm``` or ```yarn``` package managers
 
 ### Installation
