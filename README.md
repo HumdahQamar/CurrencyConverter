@@ -7,7 +7,7 @@ An application for easy currency conversion, using latest conversion rates pulle
 
 ### Prerequisites
 All required libraries are listed under ```package.json```
-The project ste-up requires ```npm``` or ```yarn``` package managers
+The project set-up requires ```npm``` or ```yarn``` package managers
 
 ### Installation
 Install all relevant libraries and dependencies by executing the following command in the project root directory:
