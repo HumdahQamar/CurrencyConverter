@@ -28,3 +28,5 @@ The default port for the application is ```19002```
 
 ## Author
 [Humdah Qamar](https://github.com/HumdahQamar)
+
+Logo designed using [draw.io](https://app.diagrams.net/)
