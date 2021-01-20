@@ -13,7 +13,7 @@ class IntroScreen extends Component {
         style={ styles.mainContainer }
       >
         <Image
-          style={{height: 90, width: 'auto'}}
+          style={{height: '90px', width: 'auto'}}
           source={ require('../image/logo.png') }
         />
         <View
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: 'white',
-    // flex: 2,
     justifyContent: 'center',
     paddingTop: '20px',
     paddingBottom: '250px',
